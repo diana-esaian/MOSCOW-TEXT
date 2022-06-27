@@ -1,1 +1,20 @@
+import pandas as pd
+from sklearn.metrics import cohen_kappa_score, confusion_matrix
 
+with open('Главы_1_5_21 — копия.txt') as f:
+    text = f.read()
+
+df_natasha = pd.read_csv('results_natasha.csv')
+df_spacy = pd.read_csv('results_spacy — копия.csv')
+
+natasha_locs_char = [pos for i in range(len(df_natasha))
+                     for pos in list(range(df_natasha.start.values[i], df_natasha.stop.values[i]))]
+spacy_locs_char = [pos for i in range(len(df_spacy))
+                   for pos in list(range(df_spacy.start.values[i], df_spacy.stop.values[i]))]
+all_pos = list(range(len(text)))
+
+natasha_markup = [1 if pos in natasha_locs_char else 0 for pos in all_pos]
+spacy_markup = [1 if pos in spacy_locs_char else 0 for pos in all_pos]
+
+# kappa from sklearn
+cohen_kappa_score(natasha_markup, spacy_markup)
