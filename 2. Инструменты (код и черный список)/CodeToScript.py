@@ -163,7 +163,13 @@ def main():
                                                'natasha_y': 'natasha_clean',
                                                'spacy_y': 'spacy_clean'})
             tables.to_csv("both_results.csv", index=False, encoding='utf-8')
-
+    os.remove("results_spacy.csv")
+    os.remove("results_natasha.csv")
+    os.remove("inner_table.csv")
+    os.remove("outer_table.csv")
+    os.remove("results_spacy_clean.csv")
+    os.remove("results_natasha_clean.csv")
+    os.remove("both_results.csv")
     print('Complete')
 
 
